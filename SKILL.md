@@ -39,4 +39,3 @@ This skill automates the creation of guideline files for **Code Agents**. A proj
 2. You (using `ask_user`): Present the tool options.
 3. User selects: "Cursor / Windsurf / Others (`AGENTS.md`)"
 4. You: Analyze the code, compile universal best practices, and save everything to the `AGENTS.md` file.
-ile.

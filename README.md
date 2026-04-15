@@ -11,6 +11,16 @@ Elite Features:
 - **Modular Context**: Detects subdirectories (e.g., frontend/backend) and creates granular context files to avoid context bloat at the root.
 - **Canonical Examples**: Instead of copying large code blocks, the skill points to real reference files in your repository.
 
+## Repository Structure
+
+```
+init-code-agent/
+├── SKILL.md              # Skill definition and instructions
+├── references/
+│   └── templates.md      # Universal content template for generated files
+└── README.md
+```
+
 ## Installation & Compatibility
 
 Because this project follows the open Agent Skills standard (using `SKILL.md`), it is highly portable and can be installed across the major AI code assistants on the market.
@@ -28,15 +38,19 @@ gemini skills install https://github.com/ecavalcanti/init-code-agent.git --scope
 ```
 *(⚠️ Important: After installation, type `/skills reload` in your interactive chat).*
 
-### 3. Cursor (Manual Install)
+### 3. Claude Code (Manual Install)
+1. Create a `skills/init-code-agent/` folder in the root of your project (or `~/.claude/skills/init-code-agent/` for global use).
+2. Copy `SKILL.md` and the `references/` folder into that directory.
+
+### 4. Cursor (Manual Install)
 Cursor natively supports `.md` skill files. If you don't use `skills.sh`, you can add it manually:
 1. Create a `.cursor/skills/` folder in the root of your project.
-2. Copy the `skills/init-code-agent/SKILL.md` file into that directory. Cursor will automatically detect and use it.
+2. Copy the `SKILL.md` file into that directory. Cursor will automatically detect and use it.
 
-### 4. OpenCode AI
+### 5. OpenCode AI
 OpenCode supports skills through community plugins.
 1. Make sure you have the `"opencode-agent-skills"` plugin added to your `opencode.json` configuration.
-2. Copy the `skills/init-code-agent/SKILL.md` file into your local `.opencode/skills/` or global `~/.config/opencode/skills/` directory.
+2. Copy the `SKILL.md` file into your local `.opencode/skills/` or global `~/.config/opencode/skills/` directory.
 
 ## How to Use
 
@@ -57,11 +71,11 @@ We built this initially for **Gemini CLI** for its superior developer accessibil
 
 ## Development and Update
 
-Whenever you modify files inside the `skills/init-code-agent/` folder, you will need to package the skill again if you are distributing a `.skill` file.
+Whenever you modify `SKILL.md` or files inside `references/`, you will need to package the skill again if you are distributing a `.skill` file.
 
 ### How to Package (Generate .skill)
 If you are developing this skill for the Gemini CLI and want to distribute a `.skill` file, you can package it using the internal script:
 
 ```bash
-node /Users/eric/.nvm/versions/node/v24.14.0/lib/node_modules/@google/gemini-cli/bundle/builtin/skill-creator/scripts/package_skill.cjs ./skills/init-code-agent ./skills
+node $(npm root -g)/@google/gemini-cli/bundle/builtin/skill-creator/scripts/package_skill.cjs . .
 ```
